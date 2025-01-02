@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+    <h2>Information output:</h2>
+
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>UID</th>
+                <th>DOB</th>
+                <th>Age</th>
+                <th>Raw Score</th>
+                <th>Rounded Score</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students.values() %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.UID }}</td>
+                <td>{{ student.DOB }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.raw_score }}</td>
+                <td>{{ student.rounded_score }}</td>
+                <td>{{ student.category }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>(Optional) download the the file:</h2>
+
+    <button type="button">Download</button> 
+
+    <br>
+
+    <form id="navigationForm" method="get">
+        <button type="button" onclick="window.location.href=`{{url_for('home')}}`">Reset</button>
+    </form>
+{% endblock %}

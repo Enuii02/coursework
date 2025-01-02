@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+    <h2>Welcome To The Student Grading Application</h2>
+
+    <form id="navigationForm" method="get">
+        <button type="button" onclick="window.location.href=`{{url_for('import_file')}}`">Continue</button>
+    </form>
+{% endblock %}

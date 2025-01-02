@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block  title %} Input {% endblock %}
+
+{% block content %}
+
+<form action="/input" method="POST">
+
+        {% if error_message %}
+            <div style="color: red;">
+                <h2>{{error_message}}</h2>
+            </div>
+        {% endif %}
+
+        <h2>Enter student details or press end</h2>
+
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name" required>
+
+        <br>
+
+        <label for="UID">UID: </label>
+        <input type="text" id="UID" name="UID" required>
+
+        <br>
+
+        <label for="DOB">Date of birth: </label>
+        <input type="date" id="DOB" name="DOB" required>
+
+        <br>
+
+        <label for="grades">Enter grades separated by a space (Ex: 50 60 70 80): </label>
+        <input type="text" id="grades" name="grades" required>
+
+        <br>
+
+        <h2>Would you like to configure the module?</h2>
+        <input type="hidden" id="user_choice" name="user_choice" value=False>
+        <input type="button" value="Yes" onclick="showModuleConfig(); document.getElementById('user_choice').value = True"></button>
+        <input type="button" value="No" onclick="hideModuleConfig(); document.getElementById('user_choice').value = False"></button>
+
+        <br>
+
+        <div class="module-config" id="module-config">
+            <label for="module_name">Enter module name: </label>
+            <input type="text" id="module_name" name="module_name">
+            
+            <br>
+    
+            <label for="weights">Enter weights of the components, separated by a space (Ex: 10 20 30 40): </label>
+            <input type="text" id="weights" name="weights">
+        </div>
+
+        <br>
+
+        <input type="hidden" id="end_it" name="end_it" value="next">
+        <button type="submit" onclick="document.getElementById('end_it').value ='next'">Next</button>
+        <button type="submit" onclick="document.getElementById('end_it').value ='end'">End</button>
+    </form>
+
+    <script>
+        function showModuleConfig() {
+            document.getElementById('module-config').style.display = 'block'
+        }
+
+        function hideModuleConfig() {
+            document.getElementById('module-config').style.display = 'none'
+        }
+
+    </script>
+
+{% endblock %}

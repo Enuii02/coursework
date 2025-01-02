@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block  title %} Module_config {% endblock %}
+
+{% block content %}
+    
+    {% if error_message %}
+    <div style="color: red;">
+        <h2>{{error_message}}</h2>
+    </div>
+    {% endif %}
+
+    <h2>Choose a text file here: </h2>
+
+    <form action="/import_file" method="post" enctype="multipart/form-data">
+        <label for="fileUpload">Upload a file:</label>
+        <input type="file" id="fileUpload" name="file" class="file_input">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Or click continue: </h2>
+    <button type="button" onclick='window.location.href=`{{ url_for("input")}}`'>Continue</button>
+
+    {% if successful_import %}
+    <div>
+        <h3>Importing successful, students imported:</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>UID</th>
+                    <th>DOB</th>
+                    <th>Scores</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students.values() %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.UID }}</td>
+                    <td>{{ student.DOB }}</td>
+                    <td>{{ student['List of grades'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <form action="/file_imported" method="post">
+
+        <h2>Custom weights (Optional)</h2>
+            <label for="custom_weights">Enter custom weights </label>
+            <input type="text" id="custom_weights" name="custom_weights">
+
+            <button type="submit">Finish</button>
+        </form>
+
+    </div>
+    {% endif %}
+{% endblock %}

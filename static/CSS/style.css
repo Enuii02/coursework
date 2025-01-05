@@ -2,41 +2,131 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    /* flex-direction: column; */
     background-color: white;
     color: white;
-    font-family: 'montserrat'
-}
-
-.container{
-    /* border: 1px solid black; */
-    padding: 3%;
-    margin: 3%;
-    background-color: #00A06E;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    font-family: 'montserrat';
+    font-size: larger;
+    padding: 0;
+    margin: 0;
+    background-image: url('../Images/university.jpg'); /* Replace with your image */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the image */
+    text-align: center;
 }
 
 .module-config {
     display: none;
 }
-
-img{
-    width: 300px;
-    margin-top: 3%;
-}
-
+  
 button{
-    padding: 5px 10px;
+    padding: 15px 25px;
     border: none;
-    font-size: medium;
-    border-radius: 5px;
+    font-size: larger;
+    font-weight: 400;
+    border-radius: 10px;
     margin: 5px;
+    cursor: pointer;
+    background-color: rgba(6, 53, 50, 1);
+    color: white;
+}
+
+hr {
+    width: 30vw;
+    border: white solid 1px;
+
+}
+
+/* The form */
+
+.main{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 100vh;
+    padding: 0;
+    background-color: white;
+}
+
+input[type="file"] {
+    display: none;
+  }
+  
+  .custom-file-upload {
+    padding: 10px 20px;
+    border: none;
+    color:rgba(6, 53, 50, 1);;
+    font-size: large;
+    font-weight: 400;
+    border-radius: 10px;
+    margin: 5px;
+    background-color: white;
+    cursor: pointer;
+  }
+
+.logo{
+    /* border: 1px solid black; */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main img{
+    width: 15vw;
+}
+
+.container{
+    /* border: 1px solid black; */
+    flex: 5;
+    background-color: #00A06E;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    padding: 3%;
+    padding-top: 10%;
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.container::-webkit-scrollbar {
+    display: none;          /* Webkit-based browsers (Chrome, Safari, etc.) */
+  }
+
+.input{
+    padding-top: 30%;
 }
 
 
+.error{
+    color: red;
+    background-color: white;
+    font-size: medium;
+    padding: 0px 20px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+table{
+    border: white solid 2px
+}
+
+.sucessfull-import{
+    padding-bottom: 30vh;
+    padding-top: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
 input{
     padding: 5px 10px;
@@ -58,4 +148,33 @@ form{
     border: none;
     font-size: medium;
     border-radius: 5px;
+}
+
+/* Input */
+
+.configq{
+    display: flex;
+}
+
+.module-config{
+    display: flex;
+    flex-direction: column;
+}
+
+*.module-config{
+    width: 40%;
+}
+
+#weights{
+    margin-top: 10px;
+}
+
+.styled-date{
+    font-size: large;
+    font-weight: 300;
+}
+
+.choice-end{
+    display: flex;
+
 }

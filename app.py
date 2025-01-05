@@ -1,5 +1,7 @@
 from student_class import Student, create_list_of_students
-from flask import Flask, render_template, request, redirect, url_for, g
+from flask import Flask, render_template, request, send_file
+from tabulate import tabulate
+import os
 
 app = Flask(__name__)
 
@@ -51,20 +53,27 @@ def import_file():
 
 @app.route('/file_imported', methods=['GET', 'POST'])
 def file_sucess():
-    weights = request.form.get('custom_weights')
+    try:
+        weights = request.form.get('custom_weights')
+        weights = weights.strip()
+        if weights != "":
+            weights_list = [(float(weight)/100) for weight in weights.split(" ")]
+        else:
+                weights_list = []
 
-    global list_of_students
-    global students
-    for s in list_of_students.values():
-        students[s["name"]] = Student(s["name"], s["UID"], s["DOB"], s["List of grades"], None, 'module', weights)
-        students[s["name"]].get_age()
-        students[s["name"]].get_rawScore()
-        students[s["name"]].get_roundedScore()
-        students[s["name"]].get_category()
+        global list_of_students
+        global students
+        for s in list_of_students.values():
+            students[s["name"]] = Student(s["name"], s["UID"], s["DOB"], s["List of grades"], None, 'module', weights_list)
+            students[s["name"]].get_age()
+            students[s["name"]].get_rawScore()
+            students[s["name"]].get_roundedScore()
+            students[s["name"]].get_category()
 
-
-    # return f"<p>{students} match my freak</p>"
-    return render_template("end.html", students=students)
+        return render_template("end.html", students=students)
+        # return f"<p>{weights_list}, {len(weights_list)} match my freak</p>"
+    except ValueError as e:
+        return render_template("import_file.html", error_message = str(e))
         
 @app.route('/input', methods=['POST','GET'])
 def input():
@@ -78,6 +87,7 @@ def input():
             user_choice = request.form.get('user_choice')
             module_name = request.form.get('module_name')
             weights = request.form.get('weights')
+            weights = weights.strip()
             if weights != "":
                 weights_list = [(float(weight)/100) for weight in weights.split(" ")]
             else:
@@ -105,6 +115,25 @@ def input():
 
     else:
         return render_template('input.html')
+
+@app.route('/download', methods=['POST', 'GET'])
+def download():
+    printable_students = []
+    for keys, values in students.items():
+        student_object = {
+            "Name": keys["Name"]
+        }
+
+        printable_students.append(student_object)
+
+    cur_path = os.path.dirname(__file__)
+    new_path = os.path.join(cur_path, 'files', 'Students.txt')
+
+    with open(new_path, 'w') as file:
+        file.write(str(printable_students))
+
+    return send_file('files/students.txt', as_attachment=True)
+    
 
 # @app.route('/end', methods=['POST','GET'])
 # def end():

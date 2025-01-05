@@ -4,59 +4,68 @@
 
 {% block content %}
 
-<form action="/input" method="POST">
+    <div class="input">
 
-        {% if error_message %}
-            <div style="color: red;">
-                <h2>{{error_message}}</h2>
-            </div>
-        {% endif %}
+        <form action="/input" method="POST">
 
-        <h2>Enter student details or press end</h2>
+            {% if error_message %}
+                <div class="error">
+                    <h2>{{error_message}}</h2>
+                </div>
+            {% endif %}
 
-        <label for="name">Name: </label>
-        <input type="text" id="name" name="name" required>
+            <h2>Enter student details or press end</h2>
 
-        <br>
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="name" required>
 
-        <label for="UID">UID: </label>
-        <input type="text" id="UID" name="UID" required>
-
-        <br>
-
-        <label for="DOB">Date of birth: </label>
-        <input type="date" id="DOB" name="DOB" required>
-
-        <br>
-
-        <label for="grades">Enter grades separated by a space (Ex: 50 60 70 80): </label>
-        <input type="text" id="grades" name="grades" required>
-
-        <br>
-
-        <h2>Would you like to configure the module?</h2>
-        <input type="hidden" id="user_choice" name="user_choice" value=False>
-        <input type="button" value="Yes" onclick="showModuleConfig(); document.getElementById('user_choice').value = True"></button>
-        <input type="button" value="No" onclick="hideModuleConfig(); document.getElementById('user_choice').value = False"></button>
-
-        <br>
-
-        <div class="module-config" id="module-config">
-            <label for="module_name">Enter module name: </label>
-            <input type="text" id="module_name" name="module_name">
-            
             <br>
-    
-            <label for="weights">Enter weights of the components, separated by a space (Ex: 10 20 30 40): </label>
-            <input type="text" id="weights" name="weights">
-        </div>
 
-        <br>
+            <label for="UID">UID: </label>
+            <input type="text" id="UID" name="UID" required>
 
-        <input type="hidden" id="end_it" name="end_it" value="next">
-        <button type="submit" onclick="document.getElementById('end_it').value ='next'">Next</button>
-        <button type="submit" onclick="document.getElementById('end_it').value ='end'">End</button>
-    </form>
+            <br>
+
+            <label for="DOB">Date of birth: </label>
+            <input type="date" id="DOB" name="DOB" class="styled-date" required>
+
+            <br>
+
+            <label for="grades">Enter grades separated by a space (Ex: 50 60 70 80): </label>
+            <input type="text" id="grades" name="grades" required>
+
+            <br>
+
+            <h2>Would you like to configure the module?</h2>
+            <div class="configq">
+                <input type="hidden" id="user_choice" name="user_choice" value=False>
+                <input type="button" value="Yes" onclick="showModuleConfig(); document.getElementById('user_choice').value = True"></button>
+                <input type="button" value="No" onclick="hideModuleConfig(); document.getElementById('user_choice').value = False"></button>
+            </div>
+
+            <br>
+
+            <div class="module-config" id="module-config">
+                <label for="module_name">Enter module name: </label>
+                <input type="text" id="module_name" name="module_name">
+                
+                <br>
+        
+                <label for="weights">Enter weights of the components, separated by a space (Ex: 10 20 30 40): </label>
+                <input type="text" id="weights" name="weights">
+            </div>
+
+            <br>
+
+            <div class="choice-end">
+                <input type="hidden" id="end_it" name="end_it" value="next">
+                <button type="submit" onclick="document.getElementById('end_it').value ='next'">Next</button>
+                <button type="submit" onclick="document.getElementById('end_it').value ='end'">End</button>
+            </div>
+        </form>
+        
+    </div>
+
 
     <script>
         function showModuleConfig() {
@@ -65,6 +74,10 @@
 
         function hideModuleConfig() {
             document.getElementById('module-config').style.display = 'none'
+        }
+
+        window.onload = function(){
+              document.getElementById('module-config').style.display = 'none'
         }
 
     </script>
